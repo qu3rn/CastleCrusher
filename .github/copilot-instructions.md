@@ -1,18 +1,20 @@
-# Mapa Zamków – Copilot Instructions
+# Project name
 
-## Nazwa projektu
-Mapa Zamków
+Castle Map
 
-## Cel
-Prosta webowa aplikacja React pokazująca zamki w Europie na interaktywnej mapie. Aplikacja ma pomagać użytkownikowi odkrywać zamki, planować trasę po zamkach i eksportować trasę do Google Maps.
+# Goal
 
-## Charakter aplikacji
-- Mapa jako główny ekran
-- Własne UI nakładane na mapę
-- Klimat eksploracji / fantasy / Heroes-like
-- Aplikacja ma być prosta, szybka i możliwa do przeniesienia później do Electron/Tauri
+A simple React web application that shows castles in Europe on an interactive map. The app should help users discover castles, plan a route between castles, and export that route to Google Maps.
 
-## Stack
+# Application character
+
+- The map is the main screen.
+- Custom UI is overlaid on top of the map.
+- The visual direction is exploration / fantasy / Heroes-like.
+- The app should remain simple, fast, and possible to move later to Electron or Tauri.
+
+# Stack
+
 - React
 - TypeScript
 - Vite
@@ -25,9 +27,10 @@ Prosta webowa aplikacja React pokazująca zamki w Europie na interaktywnej mapie
 - pnpm
 - GitHub Actions
 
-## Źródła danych
-- Początkowo OpenStreetMap przez Overpass API
-- Główne tagi:
+# Data sources
+
+- Initially OpenStreetMap through the Overpass API.
+- Main tags:
   - `historic=castle`
   - `castle_type=*`
   - `ruins=*`
@@ -35,10 +38,11 @@ Prosta webowa aplikacja React pokazująca zamki w Europie na interaktywnej mapie
   - `wikipedia`
   - `name`
   - `tourism=attraction`
-- Dane z OSM są niedoskonałe, więc projekt powinien mieć własną warstwę normalizacji i filtrowania.
-- Nie zakładaj, że każdy obiekt `historic=castle` jest klasycznym zamkiem.
+- OSM data is imperfect, so the project should have its own normalization and filtering layer.
+- Do not assume that every `historic=castle` object is a classic medieval castle.
 
-## Główne modele domenowe
+# Main domain models
+
 - `Castle`
 - `CastleRoute`
 - `MapBounds`
@@ -46,18 +50,19 @@ Prosta webowa aplikacja React pokazująca zamki w Europie na interaktywnej mapie
 - `CastleSource`
 - `RouteExport`
 
-## Zasady architektury
-- Utrzymuj prostą strukturę katalogów.
-- Oddziel mapę, dane, UI, routing trasy i logikę eksportu.
-- Nie mieszaj logiki Overpass API bezpośrednio z komponentami UI.
-- Komponenty powinny być małe i czytelne.
-- Logika domenowa powinna być testowalna poza Reactem.
-- Preferuj funkcje czyste dla normalizacji, filtrowania i eksportu URL.
-- Nie dodawaj backendu, dopóki nie jest potrzebny.
-- Przygotuj kod tak, żeby później dało się podmienić Overpass API na własne API.
+# Architecture rules
 
-## Proponowana struktura
-```
+- Keep the folder structure simple.
+- Separate map, data, UI, route planning, and export logic.
+- Do not mix Overpass API logic directly into UI components.
+- Components should be small and readable.
+- Domain logic should be testable outside React.
+- Prefer pure functions for normalization, filtering, and URL export.
+- Do not add a backend until it is needed.
+- Prepare the code so that Overpass API can later be replaced by our own API.
+
+# Suggested structure
+
 src/
   app/
   map/
@@ -75,35 +80,38 @@ src/
     lib/
     types/
   styles/
-```
 
-## UI
-- Marker zamku powinien być wyraźny i odróżniać się od zwykłych punktów mapy.
-- Karta zamku ma mieć lekki klimat gry fantasy, ale bez przesady.
-- UI musi być użyteczne na desktopie.
-- Mobile może być przygotowany później, ale nie psuj responsywności.
+# UI
 
-## Funkcje MVP
-- Mapa Europy
-- Pobieranie zamków dla aktualnego obszaru
-- Pokazanie markerów zamków
-- Karta zamku po kliknięciu
-- Dodanie zamku do trasy
-- Panel trasy
-- Eksport trasy do Google Maps
-- Podstawowe testy
+- The castle marker should be clearly visible and distinct from normal map points.
+- The castle card should have a light fantasy game-like feeling, but not be overdesigned.
+- The UI must be usable on desktop.
+- Mobile can be improved later, but do not break responsiveness.
 
-## Czego unikać
-- Nadmiernej architektury
-- Zbyt wielu bibliotek UI
-- Logiki biznesowej w komponentach mapy
-- Bezpośredniego ładowania całej Europy z Overpass przy każdym starcie
-- Zakładania, że dane OSM są idealne
-- Uzależnienia projektu od Google Maps jako głównego renderera
+# MVP features
 
-## Styl kodu
-- TypeScript strict
-- Czytelne nazwy
-- Małe pliki
-- Jawne typy dla modeli domenowych
-- Testy dla funkcji normalizujących, store trasy i eksportu Google Maps URL
+- Europe map
+- Fetch castles for the current map area
+- Show castle markers
+- Open castle card on marker click
+- Add castle to route
+- Route panel
+- Export route to Google Maps
+- Basic tests
+
+# Things to avoid
+
+- Over-engineering
+- Too many UI libraries
+- Business logic inside map components
+- Loading all of Europe directly from Overpass on every startup
+- Assuming OSM data is perfect
+- Depending on Google Maps as the main map renderer
+
+# Code style
+
+- TypeScript strict mode
+- Clear names
+- Small files
+- Explicit types for domain models
+- Tests for normalization functions, route store, and Google Maps URL export
